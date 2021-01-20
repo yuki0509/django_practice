@@ -11,6 +11,15 @@
 <body class="container">
   <h1>{{title}}</h1>
 
+  <form action="{% url 'find' %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <tr>
+      <th></th>
+      <td><input type="submit" class="btn btn-primary"></td>
+    </tr>
+  </form>
+  <hr>
   <table class="table">
     <tr>
       <th>id</th>
@@ -19,7 +28,6 @@
       <th>mail</th>
       <th>birthday</th>
     </tr>
-
     {% for item in data %}
     <tr>
       <td>{{item.id}}</td>
