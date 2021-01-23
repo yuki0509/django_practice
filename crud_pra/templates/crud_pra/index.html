@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</head>
-<body>
+{% extends 'crud_pra/layouts.html' %}
+
+{% block content %}
   <div class="container  mt-2">
     <h1>記事一覧</h1>
+    <a href="{% url 'create' %}" class="btn btn-primary mb-2">記事作成</a>
     <table class="table">
       <thead>
         <tr>
           <th>Title</th>
           <th>Date</th>
+          <th></th>
           <th></th>
           <th></th>
         </tr>
@@ -25,10 +21,10 @@
           <td>{{item.pub_date}}</td>
           <td><a href="{% url 'show' item.id %}" class="btn btn-primary">詳細</a></td>
           <td><a href="{% url 'delete' item.id %}" class="btn btn-danger">削除</a></td>
+          <td><a href="{% url 'edit' item.id%}" class="btn btn-success">編集</a></td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
-</body>
-</html>
+{% endblock %}

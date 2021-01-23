@@ -1,0 +1,17 @@
+{% extends 'crud_pra/layouts.html' %}
+
+{% block content %}
+<div class="container">
+  <h1>記事投稿フォーム</h1>
+  <form action="{% url 'create' %}" method="POST">
+    {% csrf_token %}
+    <table class="table">
+      {{form.as_table}}
+      <tr>
+        <th></th>
+        <td><input type="submit" class="btn btn-primary"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+{% endblock %}
