@@ -30,12 +30,6 @@ except ImportError:
   pass
 
 
-if not DEBUG:
-  SECRET_KEY = os.environ['SECRET_KEY']
-  import django_heroku
-  django_heroku.settings(locals())
-
-
 ALLOWED_HOSTS = ['*']
 
 
@@ -148,3 +142,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+if not DEBUG:
+  SECRET_KEY = os.environ['SECRET_KEY']
+  import django_heroku
+  django_heroku.settings(locals())
