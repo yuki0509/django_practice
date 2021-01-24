@@ -20,12 +20,23 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'j*4w0g^n3i6r*((u%s9w*me(tig&hl7zxag_6ji^z1*#b(%8vu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+try:
+  from .local_settings import *
+except ImportError:
+  pass
+
+
+if not DEBUG:
+  SECRET_KEY = os.environ['SECRET_KEY']
+  import django_heroku
+  django_heroku.settings(locals())
+
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -50,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'django_app.urls'
@@ -76,13 +88,26 @@ WSGI_APPLICATION = 'django_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+from socket import gethostname
+hostname = gethostname()
 
+print('#################')
+print(hostname)
+print('#################')
+
+if ('harayuukinoMacBook-Air.local' in hostname):
+  DATABASES = {
+    'default': {
+      'ENGINE': 'django.db.backends.sqlite3',
+      'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+  }
+else:
+  import dj_database_url
+  db_from_env = dj_database_url.config()
+  DATABASES = {
+    'default':dj_database_url.config()
+  }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -121,3 +146,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
