@@ -8,3 +8,7 @@ class Article(models.Model):
 
   def __str__(self):
     return self.title
+
+class Book(models.Model):
+  image = models.ImageField(upload_to='images', blank=True, null=True)
+  title = models.CharField(max_length=32)

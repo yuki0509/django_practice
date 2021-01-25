@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from . models import Article
-from . forms import ArticleForm
+from . models import Article, Book
+from . forms import ArticleForm, BookForm
 
 # Create your views here.
 def index(request):
@@ -45,3 +45,20 @@ def edit(request, num):
     'id':num,
   }
   return render(request, 'crud_pra/edit.html', params)
+
+def book_create(request):
+  params = {
+    'form':BookForm(),
+  }
+  if request.method == 'POST':
+    form = BookForm(request.POST,request.FILES)
+    if form.is_valid():
+      book = Book()
+      book.title = request.POST['title']
+      book.image = request.FILES['image']
+      book.save()
+      return redirect(to='index')
+    params = {
+      'form':form,
+    }
+  return render(request, 'crud_pra/book_create.html', params)

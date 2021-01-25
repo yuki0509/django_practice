@@ -85,10 +85,6 @@ WSGI_APPLICATION = 'django_app.wsgi.application'
 from socket import gethostname
 hostname = gethostname()
 
-print('#################')
-print(hostname)
-print('#################')
-
 if ('harayuukinoMacBook-Air.local' in hostname):
   DATABASES = {
     'default': {
@@ -142,6 +138,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# 画像ファイル保存場所へのパス指定
+IMAGE_ROOT = os.path.join(BASE_DIR, 'images')
+IMAGE_URL = '/images/'
 
 if not DEBUG:
   SECRET_KEY = os.environ['SECRET_KEY']
