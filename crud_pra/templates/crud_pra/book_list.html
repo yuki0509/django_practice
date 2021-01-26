@@ -1,0 +1,25 @@
+{% extends 'crud_pra/layouts.html' %}
+
+{% block content %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Image</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    {% for item in object_list %}
+      <tr>
+        <td>{{item.title}}</td>
+        <td>
+          <img src="{{item.image.url}}" alt="{{item.title}}">
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+
+  </table>
+
+{% endblock %}

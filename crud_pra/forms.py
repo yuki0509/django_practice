@@ -10,3 +10,6 @@ class BookForm(forms.ModelForm):
   class Meta:
     model = Book
     fields = ['title', 'image']
+
+class SearchForm(forms.Form):
+  key_word = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder':'検索キーワード'}))

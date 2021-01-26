@@ -22,10 +22,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', include('hello.urls')),
     path('crud_pra', include('crud_pra.urls')),
-]
-
-if settings.DEBUG:
-  print('###############')
-  print('hello')
-  print(settings.IMAGE_URL)
-  urlpatterns += static(settings.IMAGE_URL, document=settings.IMAGE_URL )
+] + static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)

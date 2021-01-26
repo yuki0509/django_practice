@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from . models import Article, Book
 from . forms import ArticleForm, BookForm
+from django.db.models import Q
+from django.views.generic import ListView
 
 # Create your views here.
 def index(request):
@@ -62,3 +64,6 @@ def book_create(request):
       'form':form,
     }
   return render(request, 'crud_pra/book_create.html', params)
+
+class BookList(ListView):
+  model = Book
