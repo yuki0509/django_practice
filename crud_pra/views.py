@@ -67,3 +67,12 @@ def book_create(request):
 
 class BookList(ListView):
   model = Book
+
+  def get_queryset(self):
+    q_word = self.request.GET.get('q')
+
+    if q_word:
+      object_list = Book.objects.filter(Q(title__icontains=q_word))
+    else:
+      object_list = Book.objects.all()
+    return object_list

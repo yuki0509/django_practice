@@ -1,6 +1,11 @@
 {% extends 'crud_pra/layouts.html' %}
 
 {% block content %}
+  <form action="" method="get">
+    <input type="text" name="q" value="{{request.GET.q}}">
+    <button type="submit">検索する</button>
+  </form>
+
   <table class="table">
     <thead>
       <tr>
