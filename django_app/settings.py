@@ -143,6 +143,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 IMAGE_ROOT = os.path.join(BASE_DIR, 'images')
 IMAGE_URL = '/images/'
 
+LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '/crud_pra/articles'
+LOGOUT_REDIRECT_URL = '/login'
+
 if not DEBUG:
   SECRET_KEY = os.environ['SECRET_KEY']
   import django_heroku
