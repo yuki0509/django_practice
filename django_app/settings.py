@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'hello',
     'sns',
     'crud_pra',
+    'accounts',
 ]
 
 MIDDLEWARE = [

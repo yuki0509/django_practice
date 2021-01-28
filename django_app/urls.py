@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', include('hello.urls')),
     path('crud_pra', include('crud_pra.urls')),
+    path('', include('accounts.urls'))
 ] + static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)

@@ -1,6 +1,15 @@
 {% extends 'crud_pra/layouts.html' %}
 
 {% block content %}
+  <nav>
+    <ul>
+      {% if user.is_authenticated %}
+      <li><a href="">ユーザー名：{{user.username}}</a></li>
+      <li><a href="{% url 'accounts:logout' %}">ログアウト</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
   <div class="container  mt-2">
     <h1>記事一覧</h1>
     <a href="{% url 'create' %}" class="btn btn-primary mb-2">記事作成</a>
